@@ -66,7 +66,7 @@ MonoBehaviour:
   applePrefab: {fileID: 0}
   speed: 10
   leftAndRightEdge: 24
-  changeDirChance: 0.1
+  changeDirChance: 0.02
   appleDropDelay: 1
 --- !u!1 &4867468627966373743
 GameObject:

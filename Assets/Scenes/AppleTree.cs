@@ -48,4 +48,13 @@ public class AppleTree : MonoBehaviour
             speed = -Mathf.Abs(speed); // Move left.
         }
     }
+
+    // Called 50 times per second.
+    void FixedUpdate() 
+    {
+        if (Random.value < changeDirChance)
+        {
+            speed *= -1; // Change direction.
+        }
+    }
 }
