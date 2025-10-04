@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class Basket : MonoBehaviour
 {
+    public ScoreCounter scoreCounter;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Find ScoreCounter.
+        GameObject scoreGO = GameObject.Find("ScoreCounter");
+        // Get ScoreCounter script.
+        scoreCounter = scoreGO.GetComponent<ScoreCounter>();
     }
 
     // Update is called once per frame
@@ -35,6 +40,7 @@ public class Basket : MonoBehaviour
         if (collidedWith.CompareTag("Apple"))
         {
             Destroy(collidedWith);
+            scoreCounter.score += 100;
         }
     }
 }
