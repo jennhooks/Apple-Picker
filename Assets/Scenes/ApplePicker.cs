@@ -7,10 +7,16 @@ public class ApplePicker : MonoBehaviour
 {
     [Header("Inscribed")]
     public GameObject basketPrefab;
-    public int numBaskets = 3;
+    public int numBaskets = 4;
     public float basketBottomY = -14f;
     public float basketSpacingY = 2f;
     public List<GameObject> basketList;
+    public int round = 1;
+    public GameObject canvas;
+    RoundCounter roundCounter;
+    GameObject tree;
+    public GameObject restartButtonPrefab;
+    AppleTree tr;
 
     public void StartGame()
     {
@@ -20,6 +26,12 @@ public class ApplePicker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        tree = GameObject.Find("AppleTree");
+        canvas = GameObject.Find("Canvas");
+        tr = tree.GetComponent<AppleTree>();
+        GameObject roundGO = GameObject.Find("RoundCounter");
+        roundCounter = roundGO.GetComponent<RoundCounter>();
+
         basketList = new List<GameObject>();
 
         for (int i = 0; i < numBaskets; i++)
@@ -53,17 +65,30 @@ public class ApplePicker : MonoBehaviour
         // Remove the Basket from the list and destroy the object
         basketList.RemoveAt(basketIndex);
         Destroy(basketGO);
+        round += 1;
+        roundCounter.round = round;
 
         // If there are no Baskets left, restart.
         if (basketList.Count == 0)
         {
-            SceneManager.LoadScene("_Scene_0");
+            GameOver();
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    void GameOver() 
     {
-        
+        tr.moving = false;
+        // Destroy all apples.
+        GameObject[] appleArray = GameObject.FindGameObjectsWithTag("Apple");
+
+        foreach (GameObject tempGO in appleArray)
+        {
+            Destroy(tempGO);
+        }
+
+
+        GameObject tRestartGO = Instantiate<GameObject>(restartButtonPrefab, canvas.transform);
+        //Vector3 pos = Vector3.zero;
+        //tRestartGO.transform.position = pos;
     }
 }
