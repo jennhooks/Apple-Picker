@@ -75,13 +75,29 @@ public class ApplePicker : MonoBehaviour
         }
     }
 
-    void GameOver() 
+    public void GameOver() 
     {
+        roundCounter.round = -1;
+
         tr.moving = false;
+        // Destroy all baskets
+        GameObject[] basketArray = GameObject.FindGameObjectsWithTag("Basket");
+
+        foreach (GameObject tempGO in basketArray)
+        {
+            Destroy(tempGO);
+        }
         // Destroy all apples.
         GameObject[] appleArray = GameObject.FindGameObjectsWithTag("Apple");
 
         foreach (GameObject tempGO in appleArray)
+        {
+            Destroy(tempGO);
+        }
+        // Destroy all apples.
+        GameObject[] branchArray = GameObject.FindGameObjectsWithTag("Branch");
+
+        foreach (GameObject tempGO in branchArray)
         {
             Destroy(tempGO);
         }

@@ -20,7 +20,7 @@ public class RoundCounter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (round > 4)
+        if (round < 0)
             uiText.text = "Game Over";
         else
             uiText.text = "Round " + round.ToString("#");
